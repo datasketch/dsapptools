@@ -1,20 +1,21 @@
-filter_dates <- function(data, range_date, by) {
+
+filter_ranges <- function(data, range, by) {
   if (is.null(data)) return()
 
   min_date <- min(data[[by]], na.rm = TRUE)
   max_date <- max(data[[by]], na.rm = TRUE)
 
-  if (length(range_date) == 2) {
-    if (min_date == range_date[1] & max_date == range_date[2]) {
+  if (length(range) == 2) {
+    if (min_date == range[1] & max_date == range[2]) {
       data_filter <- data
     } else {
       data_filter <- data |>
-        dplyr::filter(!!dplyr::sym(by) >= range_date[1] &
-                        !!dplyr::sym(by) <= range_date[2])
+        dplyr::filter(!!dplyr::sym(by) >= range[1] &
+                        !!dplyr::sym(by) <= range[2])
     }
   } else {
     data_filter <-  data |>
-      dplyr::filter(!!dplyr::sym(by) == range_date)
+      dplyr::filter(!!dplyr::sym(by) == range)
   }
   data_filter
 

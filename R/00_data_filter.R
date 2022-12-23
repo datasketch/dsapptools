@@ -24,7 +24,7 @@ data_filter <- function(data,
               dplyr::filter(id %in% name_var)
             filter_var <- var_inputs[[.x]]
             if (info_var$hdType == "Dat") {
-              df <<- filter_dates(df, range_date = filter_var, by = info_var$id)
+              df <<- filter_ranges(df, range = filter_var, by = info_var$id)
             }
             if (info_var$hdType == "list") {
               df <<- filter_list(df, filter_var, info_var$id, .id = .id)
@@ -34,8 +34,7 @@ data_filter <- function(data,
                 dplyr::filter(!!dplyr::sym(info_var$id) %in% filter_var)
             }
             if (info_var$hdType == "Num") {
-              df <<- df |>
-                dplyr::filter(!!dplyr::sym(info_var$id) == filter_var)
+              df <<- filter_ranges(df, range = filter_var, by = info_var$id)
             }
           }
         }

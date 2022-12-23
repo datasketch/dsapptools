@@ -69,16 +69,26 @@ aggregation_data <- function (data, agg, group_var, to_agg, name = NULL) {
 
 
 make_buttons <- function(ids = NULL, labels = NULL,
-                             class = "needed", class_active = "basic_active") {
+                         default_active = NULL,
+                         class_buttons = "",
+                         class = "needed",
+                         class_active = "basic_active") {
   if (is.null(ids)) return()
   if (is.null(labels)) return()
 
   df <- data.frame(id = ids, questions = labels)
   l <- purrr::map(1:nrow(df), function(z){
-    shiny::actionButton(inputId = df[z,]$id, label = df[z,]$questions, class = class)
+    div(class = class_buttons,
+    shiny::actionButton(inputId = df[z,]$id,
+                        label = htmltools::HTML(df[z,]$questions),
+                        class = class)
+    )
   })
-  l[[1]] <- gsub(class, paste(class, class_active), l[[1]])
-  l[[1]] <- htmltools::HTML(paste0(paste(l[[1]], collapse = '')))
+
+  if (!is.null(default_active)) {
+  l[[default_active]] <- gsub(class, paste(class, class_active), l[[default_active]])
+  l[[default_active]] <- htmltools::HTML(paste0(paste(l[[default_active]], collapse = '')))
+  }
 
   l
 }

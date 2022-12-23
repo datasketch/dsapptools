@@ -41,3 +41,25 @@ filter_list <- function(data, cats, by, .id) {
   data
 }
 
+aggregation <- function (aggregation, ...) {
+  if (is.null(aggregation)) return()
+  if (is.na(aggregation)) return()
+  do.call(aggregation, list(..., na.rm = TRUE))
+}
+
+aggregation_data <- function (data, agg, group_var, to_agg, name = NULL) {
+
+  if (agg == "count") {
+    dd <- data |>
+      dplyr::group_by(dplyr::across({{ group_var }})) |>
+      dplyr::summarise(dplyr::across(to_agg, ~dplyr::n(), .names = name))
+  } else {
+    dd <- data |>
+      dplyr::group_by(dplyr::across(group_var)) |>
+      dplyr::summarise(dplyr::across(to_agg,
+                                     ~dsapptools:::aggregation(agg, .x),
+                                     .names = name))
+  }
+  dd
+}
+

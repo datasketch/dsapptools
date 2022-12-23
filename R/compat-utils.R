@@ -52,7 +52,10 @@ aggregation_data <- function (data, agg, group_var, to_agg, name = NULL) {
   if (agg == "count") {
     dd <- data |>
       dplyr::group_by(dplyr::across({{ group_var }})) |>
-      dplyr::summarise(dplyr::across(to_agg, ~dplyr::n(), .names = name))
+      dplyr::summarise(...count = dplyr::n())
+    if (!is.null(name)) {
+      names(dd)[ncol(dd)] <- name
+    }
   } else {
     dd <- data |>
       dplyr::group_by(dplyr::across(group_var)) |>

@@ -3,3 +3,4 @@
 export(data_filter)
 export(var_aggregation)
 export(variable_selection)
+export(viz_selection)

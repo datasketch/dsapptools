@@ -1,5 +1,5 @@
 # create data file
-usethis::use_data_raw()
+#usethis::use_data_raw()
 
 # add test to generic functions
 usethis::use_test("compt-utils")

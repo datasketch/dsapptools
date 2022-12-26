@@ -1,5 +1,6 @@
 #' @export
-write_html <- function(data, dic, click, class_title, class_body, id = NULL, ...) {
+write_html <- function(data, dic, click, class_title,
+                       class_body, text_result_null = NULL, id = NULL, ...) {
   if (is.null(data)) return()
   if (is.null(dic)) return()
   if (is.null(click)) return()
@@ -7,6 +8,11 @@ write_html <- function(data, dic, click, class_title, class_body, id = NULL, ...
                             dic = dic,
                             var_inputs = click,
                             .id = id)
+
+  if (nrow(data_click) == 0) {
+    return(text_result_null)
+  } else {
+
   data_click <- data_click |> dplyr::select(...)
   info_click <- names(data_click)
 
@@ -41,4 +47,5 @@ write_html <- function(data, dic, click, class_title, class_body, id = NULL, ...
         )
       }), collapse = "</br>" )
   )
+  }
 }

@@ -49,3 +49,66 @@ write_html <- function(data, dic, click, class_title,
   )
   }
 }
+
+
+#' @export
+write_html_group <- function(data, dic, click,
+                             text_result_null = NULL,
+                             separate_row = NULL,
+                             sep_url = ",",
+                             url_name = "Link &#8734;",
+                             url_class = "url-class",
+                             id = NULL, ...) {
+
+  if (is.null(data)) return()
+  if (is.null(dic)) return()
+  if (is.null(click)) return()
+  data_click <- data_filter(data = data,
+                            dic = dic,
+                            var_inputs = click,
+                            .id = id)
+
+  if (nrow(data_click) == 0) {
+    return(text_result_null)
+  } else {
+
+    data_click <- data_click |> dplyr::select(...)
+
+   # htmltools::HTML(
+    #  paste0(
+   info <- purrr::map(1:nrow(data_click), function(r) {
+      info <- data_click[r,]
+      htmltools::div(class = "click-p",
+     htmltools::HTML(
+       paste0(
+      purrr::map(names(info), function(v) {
+
+       tx <- paste0("<div class = 'click-body'><div class = 'click-tl'>", v,
+                    ":</div> <div class = 'click-info'>", info[[v]], "</div>
+                    </div>", collapse = "")
+       if (v == "url") {
+         url_na <- FALSE
+         url_na <- is.na(info[[v]])
+        if (!is.null(separate_row)) {
+         if (separate_row == "url") {
+           info <- info |>
+             tidyr::separate_rows(url, sep = sep_url) |>
+             tidyr::drop_na(url)
+          if (nrow(info) == 0) url_na <- TRUE
+         }
+        }
+         if (!url_na) {
+         tx <- paste0("<div class=", url_class, ">","<a href=", info[[v]]," target='_blank'>",
+                      url_name,"</a></div>", collapse = "<br/>")
+         }
+       }
+         tx
+      }), collapse = ""))
+      )
+    })
+
+   info
+
+
+  }
+}

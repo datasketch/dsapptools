@@ -8,6 +8,7 @@ test_that("Summary click in html", {
                             class_title = "click-title",
                             class_body = "click-text",
                             id = NULL,
+                            text_result_null  = NULL,
                             "species")
   html_expect <- htmltools::HTML(
     '<div class="click-title"><q>setosa</q></div><div class="click-text"></div>')

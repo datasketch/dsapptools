@@ -14,10 +14,10 @@ var_aggregation <- function(data, dic = NULL, agg, group_var, to_agg, name = NUL
         tidyr::separate_rows( {{ var }}, sep = ",")
     }
   }
-  data <- dsapptools:::aggregation_data(data = data,
-                                        agg = agg,
-                                        group_var = group_var,
-                                        to_agg = to_agg,
-                                        name = name)
+  data <- aggregation_data(data = data,
+                           agg = agg,
+                           group_var = group_var,
+                           to_agg = to_agg,
+                           name = name)
   data
 }

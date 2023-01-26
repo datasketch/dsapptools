@@ -61,7 +61,7 @@ aggregation_data <- function (data, agg, group_var, to_agg, name = NULL) {
     dd <- data |>
       dplyr::group_by(dplyr::across(group_var)) |>
       dplyr::summarise(dplyr::across(to_agg,
-                                     ~dsapptools:::aggregation(agg, .x),
+                                     ~aggregation(agg, .x),
                                      .names = name))
   }
   dd

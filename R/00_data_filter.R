@@ -1,6 +1,6 @@
 #' @title Keep rows that match a condition
 #'
-#' @description The `data_filter()` function is used to subset a data frame, retaining all rows that satisfy a given condition.
+#' @description The `data_filter()` function is used to subset a data frame, retaining all rows that satisfy a given condition. This function helps reducing code writing when building a shiny app.
 #'
 #' @param data A data frame
 #' @param dic A data frame dictionary. This can be created by `create_dic()` function from `homodatum`package. Creating a dictionary allow `data_filter()` to detect different types of values (Dat, Cat, Num or list). This types of values belong to homodatum schema and can be checked by `homodatum::available_hd_Types()` function.

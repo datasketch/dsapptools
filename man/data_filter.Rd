@@ -18,7 +18,7 @@ data_filter(data, dic, var_inputs, special_placeholder = NULL, .id = NULL)
 \item{.id}{a character that specifies a the data frame variable id.}
 }
 \description{
-The \code{data_filter()} function is used to subset a data frame, retaining all rows that satisfy a given condition.
+The \code{data_filter()} function is used to subset a data frame, retaining all rows that satisfy a given condition. This function helps reducing code writing when building a shiny app.
 }
 \examples{
 

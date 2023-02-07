@@ -36,7 +36,7 @@ filter_list <- function(data, cats, by, .id) {
     dplyr::filter(!!dplyr::sym(by) %in% cats) |>
     dplyr::group_by(!!dplyr::sym(.id)) |>
     dplyr::summarise(dplyr::across(dplyr::everything(),
-                                   dplyr::funs(paste_vector), .names = by))
+                                   paste_vector, .names = by))
   data <- data[, -grep(by, names(data))]
   data <- data |> dplyr::inner_join(temporal_df)
   data

@@ -1,11 +1,17 @@
 Package: dsapptools
-Title: What the Package Does (One Line, Title Case)
+Title: Tools to improve the development of Shiny Apps
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+     person(given = "Camila", 
+           family = "Achuri", 
+           role = c("aut", "cre"),
+           email = "camila@datasketch.co")
+Description: Select columns, filter rows, make data aggregation and visualization recomendations more easy when developing shiny apps.
+URL: https://github.com/datasketch/dsapptools
 License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+BugReports: https://github.com/datasketch/dsapptools/issues
 Imports: 
     dplyr,
     htmltools,
@@ -19,6 +25,5 @@ Suggests:
     lfltmagic,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

@@ -1,3 +1,27 @@
+#' @title Keep rows that match a condition
+#'
+#' @description The `data_filter()` function is used to subset a data frame, retaining all rows that satisfy a given condition. This function helps reducing code writing when building a shiny app.
+#'
+#' @param data A data frame
+#' @param dic A data frame dictionary. This can be created by `create_dic()` function from `homodatum`package. Creating a dictionary allow `data_filter()` to detect different types of values (Dat, Cat, Num or list). This types of values belong to homodatum schema and can be checked by `homodatum::available_hd_Types()` function.
+#' @param var_inputs A list where columns columns and condition must be specified.
+#' @param special_placeholder Default as NULL. A character ("Todos" / "All") that adds a clickable filtering option when building a shiny app.
+#' @param .id a character that specifies a the data frame variable id.
+#'
+#' @examples
+#'
+#' data <- iris
+#' dic <- homodatum::create_dic(data)
+#' names(data) <- dic$id
+#' var_inputs <- list("species" = c("All"))
+#' data_result <- data_filter(data,
+#'                            dic,
+#'                            var_inputs = var_inputs,
+#'                            special_placeholder = "All")
+#'
+#'  # checking results
+#'  unique(data_result$species) == unique(data$species)
+#'
 #' @export
 data_filter <- function(data,
                         dic,

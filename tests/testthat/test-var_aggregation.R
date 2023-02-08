@@ -1,5 +1,6 @@
 test_that("Var agg", {
-  #library(homodatum)
+  library(homodatum)
+
   data <- homodatum::sample_data("Cat-Cat-Num-Num-Cat")
   names(data) <- c("a", "b", "c", "d", "e")
   dic <- homodatum::create_dic(data)

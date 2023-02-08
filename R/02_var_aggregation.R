@@ -2,12 +2,12 @@
 #'
 #' @description The `var_aggregation()` function is used to compute custom summary statistics from a data frame. This function helps reducing code writing and optimization when building a shiny app.
 #'
-#' @param data A data frame
+#' @param data A data frame.
 #' @param dic A data frame dictionary. This can be created by `create_dic()` function from `homodatum`package. Creating a dictionary allow `data_filter()` to detect different types of values (Dat, Cat, Num or list). This types of values belong to homodatum schema and can be checked by `homodatum::available_hd_Types()` function.
-#' @param agg Type of aggregation to be calculated. If it exists in base R, it can be calculated (sum, count, mean, sd, etc.)
-#' @param group_var variable(s) to group by
-#' @param to_agg variable to be aggregated when more than one are available
-#' @param name A string to set a custom name for the operation.
+#' @param agg Type of aggregation to be calculated. If it exists in base R, it can be calculated (sum, count, mean, sd, etc.).
+#' @param group_var variable(s) to group by.
+#' @param to_agg variable to be aggregated when more than one are available.
+#' @param name The name of the new column in the output.
 #'
 #' @examples
 #'

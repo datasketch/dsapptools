@@ -1,3 +1,29 @@
+#' @title Choose the proper visualization for you data
+#'
+#' @description The `var_aggregation()` function is used to compute custom summary statistics from a data frame. This function helps reducing code writing and optimization when building a shiny app.
+#'
+#' @param data A data frame to use for plot
+#' @param dic A data frame dictionary. This can be created by `create_dic()` function from `homodatum`package. Creating a dictionary allow `data_filter()` to detect different types of values (Dat, Cat, Num or list). This types of values belong to homodatum schema and can be checked by `homodatum::available_hd_Types()` function.
+#' @param viz Type of visualization needed. Options available: *map, map_bubbles, line, bar*.
+#' @param num_hType helper to set if the column with the data to be plotted is a Num type, from the `available_hdTypes()`.
+#'
+#' @return type of visualization needed from the `hgchmagic` package
+#'
+#' @examples
+#'
+#' data <- iris
+#' dic <- homodatum::create_dic(data)
+#' names(data) <- dic$id
+#' data_viz <- variable_selection(data = data, path = NULL, viz = NULL, "species")
+#' data_viz  <- var_aggregation(data_viz,
+#'                              dic, agg = "count",
+#'                              group_var = "species",
+#'                              to_agg = "species",
+#'                              name = "Total")
+#' viz_result <- viz_selection(data = data_viz,
+#'                              dic = dic,
+#'                              viz = "map", num_hType = TRUE)
+#'
 #' @export
 viz_selection <- function(data, dic, viz, num_hType = FALSE) {
   if (is.null(data)) return()

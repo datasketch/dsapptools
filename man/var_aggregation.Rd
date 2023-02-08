@@ -7,17 +7,17 @@
 var_aggregation(data, dic = NULL, agg, group_var, to_agg, name = NULL)
 }
 \arguments{
-\item{data}{A data frame}
+\item{data}{A data frame.}
 
 \item{dic}{A data frame dictionary. This can be created by \code{create_dic()} function from \code{homodatum}package. Creating a dictionary allow \code{data_filter()} to detect different types of values (Dat, Cat, Num or list). This types of values belong to homodatum schema and can be checked by \code{homodatum::available_hd_Types()} function.}
 
-\item{agg}{Type of aggregation to be calculated. If it exists in base R, it can be calculated (sum, count, mean, sd, etc.)}
+\item{agg}{Type of aggregation to be calculated. If it exists in base R, it can be calculated (sum, count, mean, sd, etc.).}
 
-\item{group_var}{variable(s) to group by}
+\item{group_var}{variable(s) to group by.}
 
-\item{to_agg}{variable to be aggregated when more than one are available}
+\item{to_agg}{variable to be aggregated when more than one are available.}
 
-\item{name}{A string to set a custom name for the operation.}
+\item{name}{The name of the new column in the output.}
 }
 \description{
 The \code{var_aggregation()} function is used to compute custom summary statistics from a data frame. This function helps reducing code writing and optimization when building a shiny app.

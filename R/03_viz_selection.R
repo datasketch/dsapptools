@@ -32,7 +32,7 @@ viz_selection <- function(data, dic, viz, num_hType = FALSE) {
   if (is.null(viz)) return()
 
   dic_viz <- dic |>
-    dplyr::filter(id %in% names(data))
+    dplyr::filter(dic$id %in% names(data))
 
   library <- "hgchmagic"
   pseudonym <- "hgch"

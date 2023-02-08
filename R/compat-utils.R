@@ -78,7 +78,7 @@ make_buttons <- function(ids = NULL, labels = NULL,
 
   df <- data.frame(id = ids, questions = labels)
   l <- purrr::map(1:nrow(df), function(z){
-    div(class = class_buttons,
+    htmltools::div(class = class_buttons,
     shiny::actionButton(inputId = df[z,]$id,
                         label = htmltools::HTML(df[z,]$questions),
                         class = class)

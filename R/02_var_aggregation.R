@@ -32,12 +32,12 @@ var_aggregation <- function(data, dic = NULL, agg, group_var, to_agg, name = NUL
 
   if (!is.null(dic)) {
     dic_filter <- dic |>
-      dplyr::filter(id %in% names(data))
+      dplyr::filter(dic$id %in% names(data))
 
     if ("list" %in% dic_filter$hdType) {
       var <- dic_filter |>
-        dplyr::filter(hdType %in% "list") |>
-        dplyr::pull(id)
+        dplyr::filter(dic_filter$hdType %in% "list") |>
+        dplyr::pull(dic$id)
       data <- data |>
         tidyr::separate_rows( {{ var }}, sep = ",")
     }

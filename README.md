@@ -1,0 +1,120 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# dsapptools
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+<br>
+
+## Overview
+
+dsapptools gives Datasketch a compendium of useful and generic functions
+in order to improve shiny apps developing.
+
+## Installation
+
+Install the development version of dsapptools from GitHub with:
+
+``` r
+# install.packages("devtools")
+remotes::install_github("datasketch/dsapptools")
+```
+
+## Usage
+
+Some of the main functions of this package are:
+
+- Row filtering with `data_filter()`:
+
+``` r
+library(dsapptools)
+
+# Dataset
+data <- iris
+
+# Create a homodatum dictionary
+dic <- homodatum::create_dic(data)
+names(data) <- dic$id
+
+# Create a list and set the column and the rows that must be kept
+var_inputs <- list("species" = c("versicolor"))
+
+# Apply filter
+data_result <- data_filter(data,
+                           dic,
+                           var_inputs)
+
+# Check
+unique(data_result$species)
+#> [1] versicolor
+#> Levels: setosa versicolor virginica
+```
+
+- Column(s) selection with `variable_selection`
+
+``` r
+# Dataset
+data <- iris
+
+# Select variables
+data_result <- variable_selection(data = data,
+                                  viz = NULL,
+                                  path = NULL,
+                                  "Sepal.Length", "Petal.Length")
+
+# Check
+names(data_result)
+#> [1] "Sepal.Length" "Petal.Length"
+```
+
+- Make some standard calculations with `var_aggregation`
+
+``` r
+library(homodatum)
+
+# Dataset
+data <- homodatum::sample_data("Cat-Cat-Num-Num-Cat")
+names(data) <- c("a", "b", "c", "d", "e")
+
+# Create a dataset dictionary
+dic <- create_dic(data)
+names(data) <- dic$id
+
+# Count the number of apperences for each category combination from the dataset
+data_result <- var_aggregation(data = data,
+                               dic = dic,
+                               agg = "count",
+                               to_agg = "c",
+                               name = "Conteo",
+                               group_var = c("a", "b"))
+```
+
+- Get a proper visualization from the `lfltmagic` package with
+  `viz_selection()`
+
+``` r
+# Dataset
+data <- iris
+
+# Create a dataset dictionary
+dic <- homodatum::create_dic(data)
+names(data) <- dic$id
+
+# Make some calculation
+data_viz  <- var_aggregation(data,
+                             dic, agg = "count",
+                             group_var = "species",
+                             to_agg = "species",
+                             name = "Total")
+
+# Get the proper visualization
+viz_result <- viz_selection(data = data_viz,
+                            dic = dic,
+                            viz = "map", 
+                            num_hType = TRUE)
+
+viz_result
+#> [1] "lfltmagic::lflt_choropleth_GnmNum"
+```

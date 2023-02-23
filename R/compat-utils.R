@@ -61,7 +61,7 @@ aggregation_data <- function (data, agg, group_var, to_agg, name = NULL) {
     dd <- data |>
       dplyr::group_by(dplyr::across(group_var)) |>
       dplyr::summarise(dplyr::across(to_agg,
-                                     ~dsapptools:::aggregation(agg, .x),
+                                     ~aggregation(agg, .x),
                                      .names = name))
   }
   dd
@@ -78,7 +78,7 @@ make_buttons <- function(ids = NULL, labels = NULL,
 
   df <- data.frame(id = ids, questions = labels)
   l <- purrr::map(1:nrow(df), function(z){
-    div(class = class_buttons,
+    htmltools::div(class = class_buttons,
     shiny::actionButton(inputId = df[z,]$id,
                         label = htmltools::HTML(df[z,]$questions),
                         class = class)

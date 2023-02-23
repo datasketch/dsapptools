@@ -10,7 +10,7 @@
 #' @param name The name of the new column in the output.
 #'
 #' @examples
-#'
+#' library(homodatum)
 #' data <- homodatum::sample_data("Cat-Cat-Num-Num-Cat")
 #'
 #' names(data) <- c("a", "b", "c", "d", "e")
@@ -36,7 +36,7 @@ var_aggregation <- function(data, dic = NULL, agg, group_var, to_agg, name = NUL
 
     if ("list" %in% dic_filter$hdType) {
       var <- dic_filter |>
-        dplyr::filter(dic_filter$hdType %in% "list") |>
+        dplyr::filter(hdType %in% "list") |>
         dplyr::pull(dic$id)
       data <- data |>
         tidyr::separate_rows( {{ var }}, sep = ",")

@@ -1,3 +1,18 @@
+#' Write HTML output
+#'
+#' This function generates HTML output based on a dataset and a dictionary, and applies click events to selected elements.
+#'
+#' @param data A dataset to display.
+#' @param dic A dictionary used to format the output.
+#' @param click A vector of column names to apply click events to.
+#' @param class_title A CSS class to apply to the title.
+#' @param class_body A CSS class to apply to the body.
+#' @param text_result_null Text to display if the data is empty.
+#' @param id An optional ID to apply to the HTML output.
+#' @param ... Additional arguments to pass to \code{\link[dplyr]{select}}.
+#'
+#' @return An HTML output.
+#'
 #' @export
 write_html <- function(data, dic, click, class_title,
                        class_body, text_result_null = NULL, id = NULL, ...) {
@@ -50,7 +65,23 @@ write_html <- function(data, dic, click, class_title,
   }
 }
 
-
+#' Write HTML output for grouped data
+#'
+#' This function creates an HTML output for a grouped data set.
+#'
+#' @param data A data frame to create the output from
+#' @param dic A list of character vectors where each vector contains the names of the variables to be included in the output. The names of the list should be the group names
+#' @param click A vector of variable names from data that will be used to filter the data. The HTML output is created only from the filtered data
+#' @param text_result_null Text to be returned in case the filtered data is empty
+#' @param separate_row Variable name that should be used to separate the rows in case it has multiple values
+#' @param sep_url Separator used to separate multiple URLs in case they exist
+#' @param url_name Name used to show the URL link in the HTML output
+#' @param url_class CSS class for the URL link
+#' @param id A variable name to use as an ID for the HTML output
+#' @param ... Other arguments to be passed to \code{dplyr::select()}
+#'
+#' @return An HTML output for the filtered data
+#'
 #' @export
 write_html_group <- function(data, dic, click,
                              text_result_null = NULL,

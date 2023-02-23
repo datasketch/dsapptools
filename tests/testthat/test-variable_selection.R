@@ -9,5 +9,5 @@ test_that("Var selection", {
   data_result <- variable_selection(data = iris,
                                     viz = "bar",
                                     path = "tests/testthat/test_yaml/viz_conf")
-  expect_equal(names(data_result), "Species")
+  expect_equal(names(data_result), c("Species", "Petal.Width"))
 })

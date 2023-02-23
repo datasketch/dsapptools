@@ -59,7 +59,7 @@ aggregation_data <- function (data, agg, group_var, to_agg, name = NULL) {
     }
   } else {
     dd <- data |>
-      dplyr::group_by(dplyr::across(group_var)) |>
+      dplyr::group_by(dplyr::across(all_of(group_var))) |>
       dplyr::summarise(dplyr::across(to_agg,
                                      ~aggregation(agg, .x),
                                      .names = name))

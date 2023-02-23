@@ -23,7 +23,7 @@ var_aggregation(data, dic = NULL, agg, group_var, to_agg, name = NULL)
 The \code{var_aggregation()} function is used to compute custom summary statistics from a data frame. This function helps reducing code writing and optimization when building a shiny app.
 }
 \examples{
-
+library(homodatum)
 data <- homodatum::sample_data("Cat-Cat-Num-Num-Cat")
 
 names(data) <- c("a", "b", "c", "d", "e")

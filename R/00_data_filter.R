@@ -43,7 +43,7 @@ data_filter <- function(data,
         df <- filter_ranges(df, range = filter_var, by = name_var)
       } else if (info_var$hdType == "list") {
         df <- filter_list(df, filter_var, name_var, .id = .id)
-      } else if (info_var$hdType == c("Cat", "character", "factor")) {
+      } else if (info_var$hdType %in% c("Cat", "character", "factor")) {
         df <- df  |>  dplyr::filter(!!dplyr::sym(name_var) %in% filter_var)
       } else {
         df <- df

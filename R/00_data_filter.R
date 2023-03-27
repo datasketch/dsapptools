@@ -33,27 +33,37 @@ data_filter <- function(data,
   df <- data
   if (is.null(var_inputs)) return()
   if (!is.list(var_inputs)) return()
-
-  purrr::reduce(var_inputs, .init = data, .f = function(df, var) {
-    if (!is.null(var) && !setequal(var, "") && !(setequal(var, special_placeholder) && !is.null(special_placeholder))) {
-      name_var <- names(var_inputs)
-      info_var <- dic %>% dplyr::filter(id %in% name_var)
-      filter_var <- var
-      if (info_var$hdType %in% c("Dat", "Num", "numeric", "integer")) {
-        df <- filter_ranges(df, range = filter_var, by = name_var)
-      } else if (info_var$hdType == "list") {
-        df <- filter_list(df, filter_var, name_var, .id = .id)
-      } else if (info_var$hdType == c("Cat", "character", "factor")) {
-        df <- df  |>  dplyr::filter(!!dplyr::sym(name_var) %in% filter_var)
-      } else {
-        df <- df
+  tem_ls <-
+    seq_along(var_inputs) |>
+    purrr::map(function(.x) {
+      if (!is.null(var_inputs[[.x]])) {
+        if (!setequal(var_inputs[[.x]], "")) {
+          other_condition <- FALSE
+          if (!is.null(special_placeholder)) {
+            other_condition <- setequal(var_inputs[[.x]], special_placeholder)
+          }
+          if (!other_condition) {
+            name_var <- names(var_inputs)[.x]
+            info_var <- dic |>
+              dplyr::filter(id %in% name_var)
+            filter_var <- var_inputs[[.x]]
+            if (info_var$hdType == "Dat") {
+              df <<- filter_ranges(df, range = filter_var, by = info_var$id)
+            }
+            if (info_var$hdType == "list") {
+              df <<- filter_list(df, filter_var, info_var$id, .id = .id)
+            }
+            if (info_var$hdType == "Cat") {
+              df <<- df |>
+                dplyr::filter(!!dplyr::sym(info_var$id) %in% filter_var)
+            }
+            if (info_var$hdType == "Num") {
+              df <<- filter_ranges(df, range = filter_var, by = info_var$id)
+            }
+          }
+        }
       }
-    } else {
-      df <- df
-    }
-    df
-  })
-
-  #return(df)
+    })
+  rm(tem_ls)
+  df
 }
-

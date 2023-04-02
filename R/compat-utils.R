@@ -84,6 +84,7 @@ make_buttons <- function(ids = NULL, labels = NULL,
                         class = class)
     )
   })
+  names(l) <- unique(df$id)
 
   if (!is.null(default_active)) {
   l[[default_active]] <- gsub(class, paste(class, class_active), l[[default_active]])
